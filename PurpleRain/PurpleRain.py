@@ -11,11 +11,15 @@ PINK = (189, 144, 212)
 PURPLE = (34, 21, 73)
 
 # global variables
+pygame.init()
+pygame.mixer.init()
 FPS = 60
 displayHeight = 900
 displayWidth = 900
 size = (displayWidth, displayHeight)
 clock = pygame.time.Clock()
+droplet = pygame.mixer.music.load("rain.mp3")
+pygame.mixer.music.play()
 
 class rain:
     def __init__(self, screen, x, y, speed, height):
@@ -41,13 +45,15 @@ class rain:
     def checkOffScreen(self):
         if self.y > displayHeight:
             self.y = random.randint(-50, 0)
+            self.x = random.randint(0, displayWidth)
+
 
 def main():
     # running variable
     running = True
 
     # things for pygame to initialise
-    pygame.init()
+
     frame = pygame.display.set_mode(size)
     pygame.display.set_caption("Purple Rain")
 

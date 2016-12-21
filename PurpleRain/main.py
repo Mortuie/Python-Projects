@@ -1,5 +1,6 @@
 import pygame
 import random
+import RainDroplet
 
 """
 @author lb809 on 20/12/16
@@ -16,38 +17,13 @@ PURPLE = (34, 21, 73)
 
 # global variables
 FPS = 60
-displayHeight = 900
-displayWidth = 900
+displayHeight = 600
+displayWidth = int((16 * displayHeight) / 9)
 size = (displayWidth, displayHeight)
 clock = pygame.time.Clock()
 droplet = pygame.mixer.music.load("rain.mp3")
 pygame.mixer.music.play()
 
-class rain:
-    def __init__(self, screen, x, y, speed, height):
-        self.x = x
-        self.y = y
-        self.speed = speed
-
-        self.height = height
-        self.colour = PINK
-        self.frame = screen
-
-        if self.speed > 11:
-            self.width = random.randint(2, 3)
-        else:
-            self.width = random.randint(1, 2)
-
-    def draw(self):
-        pygame.draw.rect(self.frame, self.colour, [self.x, self.y, self.width, self.height], 0)
-
-    def move(self):
-        self.y += self.speed
-
-    def checkOffScreen(self):
-        if self.y > displayHeight:
-            self.y = random.randint(-50, 0)
-            self.x = random.randint(0, displayWidth)
 
 
 def main():
@@ -61,7 +37,7 @@ def main():
     # object array of rain
     rainDrops = []
     for i in range(500):
-        rainDrops.append(rain(frame, random.randint(0, displayWidth), random.randint(-50, displayHeight), random.randint(10, 13), random.randint(7, 13)))
+        rainDrops.append(RainDroplet.rain(frame, random.randint(0, displayWidth), random.randint(-50, displayHeight), random.randint(10, 13), random.randint(7, 13), PINK))
 
     while running:
         for event in pygame.event.get():
@@ -72,7 +48,7 @@ def main():
 
         for rainDroplets in rainDrops:
             rainDroplets.move()
-            rainDroplets.checkOffScreen()
+            rainDroplets.checkOffScreen(displayWidth, displayHeight)
             rainDroplets.draw()
 
         pygame.display.flip()

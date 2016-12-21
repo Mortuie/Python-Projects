@@ -6,13 +6,15 @@ import random
 @inspiration https://www.youtube.com/watch?v=KkyIDI6rQJI
 """
 
+# initialising pygame & etc..
+pygame.init()
+pygame.mixer.init()
+
 # Colours
 PINK = (189, 144, 212)
 PURPLE = (34, 21, 73)
 
 # global variables
-pygame.init()
-pygame.mixer.init()
 FPS = 60
 displayHeight = 900
 displayWidth = 900
@@ -53,7 +55,6 @@ def main():
     running = True
 
     # things for pygame to initialise
-
     frame = pygame.display.set_mode(size)
     pygame.display.set_caption("Purple Rain")
 

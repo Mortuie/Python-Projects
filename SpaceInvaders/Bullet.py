@@ -11,9 +11,13 @@ class bullet:
         self.speed = 10
         self.x = x
         self.y = DISPLAYHEIGHT - 90
+        self.collision = False
 
     def draw(self):
         pygame.draw.rect(self.frame, WHITE, [int(self.x), int(self.y), 6, 10], 0)
 
     def move(self):
         self.y -= self.speed
+
+    def flickCollisionState(self):
+        self.collision = True

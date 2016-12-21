@@ -3,6 +3,7 @@ from Constants import *
 from Paddle import *
 from Bullet import *
 from Monster import *
+from NecessaryFunctions import *
 
 """
 @author lb809 on 21/12/16
@@ -19,7 +20,7 @@ def main():
     playerPaddle = paddle(frame)
     movePaddleBy = 0
 
-
+    # object arrays
     allBullets = []
     monsters = []
 
@@ -43,17 +44,34 @@ def main():
                 if event.key == pygame.K_a or event.key == pygame.K_d:
                     movePaddleBy = 0
 
+        if len(allBullets) != 0:
+            for a in reversed(allBullets):
+                for b in reversed(monsters):
+                    if distanceBetweenTwoPoints(a.x, a.y, b.x, b.y) < 30:
+                        a.flickCollisionState()
+                        b.flickCollisionState()
+
 
         if len(allBullets) != 0:
             for projectile in reversed(allBullets):
                 if projectile.y < 0:
+                    allBullets.remove(projectile)
+                elif projectile.collision:
                     allBullets.remove(projectile)
                 else:
                     projectile.move()
                     projectile.draw()
 
         for j in reversed(monsters):
-            j.draw()
+            if j.collision:
+                monsters.remove(j)
+            else:
+                if j.x + 30 == DISPLAYWIDTH or j.x - 30 == 0:
+                    for h in reversed(monsters):
+                        h.speed *= -1
+                        h.y += 20
+                j.move()
+                j.draw()
 
         playerPaddle.move(movePaddleBy)
         playerPaddle.draw()

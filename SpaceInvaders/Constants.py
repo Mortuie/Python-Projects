@@ -1,0 +1,16 @@
+"""
+@author lb809 on 21/12/16
+"""
+
+# COLOURS
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+ORANGE = (255, 87, 51)
+
+# Screen Constants
+DISPLAYHEIGHT = 600
+DISPLAYWIDTH = 1000
+SIZE = (DISPLAYWIDTH, DISPLAYHEIGHT)
+
+# Game Constants
+FPS = 60

@@ -1,9 +1,10 @@
 # Python Games Repository
 
 ## Introduction
-These are small individual projects/games coded and produced by me in python. 
-Inspiration has been taken from various sources and if so is quoted in the comments in
-the respective projects
+These are small individual projects/games coded and produced by me in python. This is for me
+to try and start building a small portfolio of python programming and also just to get some 
+GUI and python programming practice. Inspiration has been taken from various sources and if 
+so is quoted in the comments in the respective projects.
 
 ## Projects created
 * Purple Rain Tribute - Circa 21/12/16

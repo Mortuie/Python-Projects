@@ -1,5 +1,5 @@
 import pygame
-from Constants import *
+import Constants
 from Paddle import *
 from Bullet import *
 from Monster import *
@@ -15,7 +15,7 @@ clock = pygame.time.Clock()
 
 def main():
     running = True
-    frame = pygame.display.set_mode(SIZE)
+    frame = pygame.display.set_mode(Constants.SIZE)
     pygame.display.set_caption("Space Invaders")
     playerPaddle = paddle(frame)
     movePaddleBy = 0

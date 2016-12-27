@@ -14,6 +14,14 @@ class bird:
         self.velocity = 0
         self.gravity = 1
 
+
+    def getBirdX(self):
+        return self.x
+
+
+    def getBirdY(self):
+        return self.y
+
     def drawBird(self):
         pygame.draw.circle(self.frame, Constants.RED, (self.x, self.y), self.radius)
 

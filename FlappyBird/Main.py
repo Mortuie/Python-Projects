@@ -18,7 +18,7 @@ def main():
 
     gameRunning = True
 
-    # setting up the window
+
     frame = pygame.display.set_mode(Constants.SIZE)
     pygame.display.set_caption(Constants.TITLE)
 
@@ -26,24 +26,24 @@ def main():
 
     pipes = []
 
-    # game loop
     while (gameRunning):
         frame.fill(Constants.WHITE)
-        # event handling
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gameRunning = False
-
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     playerBird.whenSpaceIsPressed()
 
 
+
         playerBird.updateBird()
         playerBird.drawBird()
 
+
         if (frameCount % 60 == 0):
-            pipes.append(PipeGenerator.pipe(frame))
+            pipes.append(PipeGenerator.pipe(frame, playerBird))
 
         if (len(pipes) != 0):
             for pipe in reversed(pipes):
@@ -52,6 +52,12 @@ def main():
                 else:
                     pipe.drawPipe()
                     pipe.movePipe()
+                    if pipe.collidedWithBird():
+                        pipe.changeColourFromOriginal()
+                    else:
+                        pipe.changeColourBackToOriginal()
+
+
 
         pygame.display.flip()
         clock.tick(Constants.FPS)

@@ -1,5 +1,4 @@
 import pygame
-import random
 import RainDroplet
 import Constants
 
@@ -19,25 +18,25 @@ pygame.mixer.music.play()
 
 
 def main():
-    running = True
+    gameRunning = True
 
     frame = pygame.display.set_mode(Constants.SIZE)
     pygame.display.set_caption("Purple Rain")
 
     rainDrops = []
     for i in range(500):
-        rainDrops.append(RainDroplet.rain(frame, random.randint(0, Constants.DISPLAYWIDTH), random.randint(-50, Constants.DISPLAYHEIGHT), random.randint(10, 13), random.randint(7, 13), Constants.PINK))
+        rainDrops.append(RainDroplet.rain(frame))
 
-    while running:
+    while gameRunning:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                gameRunning = False
 
         frame.fill(Constants.PURPLE)
 
         for rainDroplets in rainDrops:
             rainDroplets.move()
-            rainDroplets.checkOffScreen(Constants.DISPLAYWIDTH, Constants.DISPLAYHEIGHT)
+            rainDroplets.checkOffScreen()
             rainDroplets.draw()
 
         pygame.display.flip()

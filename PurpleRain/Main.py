@@ -7,15 +7,12 @@ import Constants
 @inspiration https://www.youtube.com/watch?v=KkyIDI6rQJI
 """
 
-# initialising pygame & etc..
+
 pygame.init()
 pygame.mixer.init()
-
-
 clock = pygame.time.Clock()
 droplet = pygame.mixer.music.load("rain.mp3")
 pygame.mixer.music.play()
-
 
 def main():
     gameRunning = True
@@ -28,15 +25,15 @@ def main():
         rainDrops.append(RainDroplet.rain(frame))
 
     while gameRunning:
+        frame.fill(Constants.PURPLE)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gameRunning = False
 
-        frame.fill(Constants.PURPLE)
-
         for rainDroplets in rainDrops:
-            rainDroplets.move()
             rainDroplets.checkOffScreen()
+            rainDroplets.move()
             rainDroplets.draw()
 
         pygame.display.flip()

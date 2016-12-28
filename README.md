@@ -1,4 +1,4 @@
-# Python Games Repository
+# Small Python Projects
 
 ## Introduction
 These are small individual projects/games coded and produced by me in python. This is for me

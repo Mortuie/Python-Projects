@@ -7,7 +7,7 @@ GUI and python programming practice. Inspiration has been taken from various sou
 so is quoted in the comments in the respective projects.
 
 ## Projects created
-* Purple Rain Tribute - Circa 21/12/16
+* Purple Rain Tribute - Circa 21/12/16 *(Status: Done)*
 * Basic Space invader game - Circa 21/12/16
 * Flappy Bird Clone - Circa 24/12/16
 

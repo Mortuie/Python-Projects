@@ -22,11 +22,24 @@ class pipe:
         self.height1 = random.randint(random.randint(25, 35), Constants.DISPLAYHEIGHT - (3*self.pipeWidth))
         self.height2 = Constants.DISPLAYHEIGHT - (self.height1 + self.gap)
 
-    def collidedWithBird(self):
-        birdX = self.playerBird.getBirdX()
-        birdY = self.playerBird.getBirdY()
+        self.birdX = self.playerBird.getBirdX()
+        self.birdY = self.playerBird.getBirdY()
+        self.birdRadius = self.playerBird.getBirdRadius()
 
-        if self.x <= birdX and birdX <= self.x+self.pipeWidth and (birdY <= self.height1 or birdY >= self.height1+self.gap):
+    def drawPipe(self):
+        pygame.draw.rect(self.frame, self.colour,[self.x, self.y, self.pipeWidth, self.height1])
+        pygame.draw.rect(self.frame, self.colour, [self.x, Constants.DISPLAYHEIGHT - self.height2, self.pipeWidth, self.height2])
+
+    def collidedWithBird(self):
+        return self.withinXBounds() and self.withinYBounds()
+
+    def withinXBounds(self):
+        if self.x <= self.birdX + self.birdRadius and self.x + self.pipeWidth >= self.birdX - self.birdRadius:
+            return True
+        return False
+
+    def withinYBounds(self):
+        if self.height1 >= self.birdY + self.birdRadius or self.height1 + self.gap <= self.birdY + self.birdRadius:
             return True
         return False
 
@@ -36,11 +49,7 @@ class pipe:
     def changeColourBackToOriginal(self):
         self.colour = Constants.GREEN
 
-    def drawPipe(self):
-        pygame.draw.rect(self.frame, self.colour,[self.x, self.y, self.pipeWidth, self.height1])
-        pygame.draw.rect(self.frame, self.colour, [self.x, Constants.DISPLAYHEIGHT - self.height2, self.pipeWidth, self.height2])
-
-    def movePipe(self):
+    def updatePipe(self):
         self.x -= self.speed
 
     def offPage(self):

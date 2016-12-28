@@ -14,10 +14,15 @@ class rain:
         self.colour = colour
         self.frame = screen
 
-        if self.speed > 11:
+        if self.rainIsFast():
             self.width = random.randint(2, 3)
         else:
             self.width = random.randint(1, 2)
+
+    def rainIsFast(self):
+        if self.speed > 11:
+            return True
+        return False
 
     def draw(self):
         pygame.draw.rect(self.frame, self.colour, [self.x, self.y, self.width, self.height], 0)

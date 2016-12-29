@@ -8,16 +8,21 @@ import PipeGenerator
 
 pygame.init()
 clock = pygame.time.Clock()
+frame = pygame.display.set_mode(Constants.SIZE)
+pygame.display.set_caption(Constants.TITLE)
 
 def main():
     frameCount = 0
     gameRunning = True
 
-    frame = pygame.display.set_mode(Constants.SIZE)
-    pygame.display.set_caption(Constants.TITLE)
-
     playerBird = Bird.bird(frame)
     pipes = []
+
+    def frameCountIsDivisibleBy60():
+        return frameCount % 60 == 0
+
+    def PipeArrayIsNotEmpty():
+        return len(pipes) != 0
 
     while gameRunning:
         frame.fill(Constants.WHITE)
@@ -32,10 +37,11 @@ def main():
         playerBird.updateBird()
         playerBird.drawBird()
 
-        if frameCount % 60 == 0:
+        if frameCountIsDivisibleBy60():
             pipes.append(PipeGenerator.pipe(frame, playerBird))
 
-        if len(pipes) != 0:
+
+        if PipeArrayIsNotEmpty():
             for pipe in reversed(pipes):
                 if pipe.offPage():
                     pipes.remove(pipe)

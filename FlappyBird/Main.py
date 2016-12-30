@@ -14,6 +14,8 @@ clock = pygame.time.Clock()
 frame = pygame.display.set_mode(Constants.SIZE)
 pygame.display.set_caption(Constants.TITLE)
 
+# TODO add like a start screen and a play again screen.
+
 def main():
     score = 0
     frameCount = 0

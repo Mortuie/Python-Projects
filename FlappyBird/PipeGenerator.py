@@ -29,6 +29,7 @@ class pipe:
         pygame.draw.rect(self.frame, self.colour, [self.x, self.y, self.pipeWidth, self.height1])
         pygame.draw.rect(self.frame, self.colour, [self.x, Constants.DISPLAYHEIGHT - self.height2, self.pipeWidth, self.height2])
 
+    # TODO collision detection isn't working properly... Need this fixed.
     def collidedWithBird(self):
         return self.withinXBounds() and self.withinYBounds()
 

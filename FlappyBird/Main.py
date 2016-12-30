@@ -2,6 +2,7 @@ import Constants
 import pygame
 import Bird
 import PipeGenerator
+
 """
 @author lb809 on 24/12/16
 """
@@ -18,8 +19,8 @@ def main():
     playerBird = Bird.bird(frame)
     pipes = []
 
-    def frameCountIsDivisibleBy60():
-        return frameCount % 60 == 0
+    def frameCountIsDivisibleByNumber():
+        return frameCount % 90 == 0
 
     def PipeArrayIsNotEmpty():
         return len(pipes) != 0
@@ -33,13 +34,11 @@ def main():
                 if event.key == pygame.K_SPACE:
                     playerBird.whenSpaceIsPressed()
 
-
         playerBird.updateBird()
         playerBird.drawBird()
 
-        if frameCountIsDivisibleBy60():
+        if frameCountIsDivisibleByNumber():
             pipes.append(PipeGenerator.pipe(frame, playerBird))
-
 
         if PipeArrayIsNotEmpty():
             for pipe in reversed(pipes):

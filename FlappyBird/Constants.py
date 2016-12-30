@@ -1,7 +1,7 @@
 # window variables
 TITLE = "Flappy Bird"
-DISPLAYHEIGHT = 500
-DISPLAYWIDTH = int((16 * DISPLAYHEIGHT) / 9)
+DISPLAYHEIGHT = 450
+DISPLAYWIDTH = 280
 SIZE = (DISPLAYWIDTH, DISPLAYHEIGHT)
 
 # other running variables

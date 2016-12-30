@@ -24,7 +24,7 @@ class bird:
         return self.radius
 
     def drawBird(self):
-        pygame.draw.circle(self.frame, Constants.RED, (self.x, self.y), self.radius)
+        pygame.draw.circle(self.frame, Constants.PINK, (self.x, self.y), self.radius)
 
     def whenSpaceIsPressed(self):
         self.velocity -= 25 * self.gravity

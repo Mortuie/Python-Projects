@@ -8,11 +8,14 @@ import PipeGenerator
 """
 
 pygame.init()
+pygame.font.init()
+font = pygame.font.Font(None, 30)
 clock = pygame.time.Clock()
 frame = pygame.display.set_mode(Constants.SIZE)
 pygame.display.set_caption(Constants.TITLE)
 
 def main():
+    score = 0
     frameCount = 0
     gameRunning = True
 
@@ -29,16 +32,19 @@ def main():
         frame.fill(Constants.WHITE)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                gameRunning = False
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     playerBird.whenSpaceIsPressed()
+                if event.key == pygame.K_p:
+                    pause()
 
         playerBird.updateBird()
         playerBird.drawBird()
 
         if frameCountIsDivisibleByNumber():
             pipes.append(PipeGenerator.pipe(frame, playerBird))
+            score += 1
 
         if PipeArrayIsNotEmpty():
             for pipe in reversed(pipes):
@@ -52,10 +58,34 @@ def main():
                     else:
                         pipe.changeColourBackToOriginal()
 
+        displayText("Score: " + str(score), 0, 0)
         pygame.display.flip()
         clock.tick(Constants.FPS)
         frameCount += 1
 
+def pause():
+    pausedState = True
+    quitState = True
+    while pausedState and quitState:
+        displayText("Game Paused", Constants.DISPLAYWIDTH / 2, Constants.DISPLAYHEIGHT / 2)
+        displayText("'P' to resume", Constants.DISPLAYWIDTH / 2, Constants.DISPLAYHEIGHT/2 + 40)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quitState = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    pausedState = False
+
+        pygame.display.flip()
+        clock.tick(Constants.FPS)
+
+    if not quitState:
+        pygame.quit()
+
+
+def displayText(stringDisplayed, x, y):
+    scoreText = font.render(stringDisplayed, 1, Constants.BLACK)
+    frame.blit(scoreText, (x, y))
 
 if __name__ == "__main__":
     main()

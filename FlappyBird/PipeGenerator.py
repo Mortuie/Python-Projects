@@ -12,7 +12,7 @@ class pipe:
         self.frame = screen
         self.playerBird = bird
         self.colour = Constants.GREEN
-        self.x = Constants.DISPLAYWIDTH - 60
+        self.x = Constants.DISPLAYWIDTH
         self.y = 0
         self.gap = random.randint(100, 130)
         self.speed = 2
@@ -36,7 +36,7 @@ class pipe:
         return (self.x <= self.birdX + self.birdRadius) and (self.x + self.pipeWidth >= self.birdX - self.birdRadius)
 
     def withinYBounds(self):
-        return (self.height1 >= self.birdY - self.birdRadius) or (Constants.DISPLAYHEIGHT - self.height2 <= self.birdY + self.birdRadius)
+        return (self.height1 >= self.birdY - self.birdRadius) or (self.height1 + self.gap <= self.birdY + self.birdRadius)
 
     def changeColourFromOriginal(self):
         self.colour = Constants.RED

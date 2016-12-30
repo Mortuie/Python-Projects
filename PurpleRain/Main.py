@@ -7,7 +7,6 @@ import Constants
 @inspiration https://www.youtube.com/watch?v=KkyIDI6rQJI
 """
 
-
 pygame.init()
 pygame.mixer.init()
 clock = pygame.time.Clock()
@@ -21,7 +20,7 @@ def main():
     pygame.display.set_caption("Purple Rain")
 
     rainDrops = []
-    for i in range(500):
+    for number in range(500):
         rainDrops.append(RainDroplet.rain(frame))
 
     while gameRunning:
@@ -33,7 +32,7 @@ def main():
 
         for rainDroplets in rainDrops:
             rainDroplets.checkOffScreen()
-            rainDroplets.move()
+            rainDroplets.moveRain()
             rainDroplets.draw()
 
         pygame.display.flip()

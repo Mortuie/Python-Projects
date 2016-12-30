@@ -20,15 +20,13 @@ class rain:
         else:
             self.width = random.randint(1, 2)
 
-    def rainIsFast(self):
-        if self.speed > 11:
-            return True
-        return False
-
     def draw(self):
         pygame.draw.rect(self.frame, self.colour, [self.x, self.y, self.width, self.height], 0)
 
-    def move(self):
+    def rainIsFast(self):
+        return self.speed > 11
+
+    def moveRain(self):
         self.y += self.speed
 
     def checkOffScreen(self):

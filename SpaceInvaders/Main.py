@@ -3,7 +3,6 @@ import Constants
 from Paddle import *
 from Bullet import *
 from Monster import *
-from NecessaryFunctions import *
 
 """
 @author lb809 on 21/12/16
@@ -27,9 +26,14 @@ def main():
     for i in range(5):
         monsters.append(monster(frame, 175 * (i + 1)))
 
+    def distanceBetweenTwoPoints(x1, y1, x2, y2):
+        diffX = (x1 - x2) ** 2
+        diffY = (y1 - y2) ** 2
+
+        return (diffX + diffY) ** 0.5
 
     while running:
-        frame.fill(BLACK)
+        frame.fill(Constants.BLACK)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -50,7 +54,6 @@ def main():
                     if distanceBetweenTwoPoints(a.x, a.y, b.x, b.y) < 30:
                         a.flickCollisionState()
                         b.flickCollisionState()
-
 
         if len(allBullets) != 0:
             for projectile in reversed(allBullets):
@@ -77,7 +80,6 @@ def main():
         playerPaddle.draw()
         pygame.display.flip()
         clock.tick(FPS)
-
 
 
 if __name__ == "__main__":

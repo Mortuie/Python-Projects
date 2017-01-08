@@ -10,5 +10,6 @@ so is quoted in the comments in the respective projects.
 * Purple Rain Tribute - Started around 21/12/16 *(Status: Done)*
 * Basic Space invader game - Started around: 21/12/16 *(Status: Unfinished)*
 * Flappy Bird Clone - Started around: 24/12/16 *(Status: Unfinished)*
+* TicTacToe emulation - Started around 4/01/17 *(Status: Unfinished)*
 
 Leon Boehmer 2016 ©

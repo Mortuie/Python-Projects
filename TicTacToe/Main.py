@@ -27,7 +27,6 @@ def main():
                 gameRunning = False
 
 
-
         gameBoard.drawBoard()
         clock.tick(Constants.FPS)
         pygame.display.flip()

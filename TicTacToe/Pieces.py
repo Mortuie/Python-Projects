@@ -4,8 +4,8 @@ import Constants
 @author lb809 on 08/01/17
 """
 
-imageX = pygame.image.load("x.png")
-imageO = pygame.image.load("o.png")
+imageX = pygame.image.load("mediaFiles/x.png")
+imageO = pygame.image.load("mediaFiles/o.png")
 
 class piece:
     def __init__(self, frame, x, y, type):

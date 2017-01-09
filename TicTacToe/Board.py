@@ -11,16 +11,14 @@ class board:
         self.frame = frame
         self.dimensions = size
 
-
     def createBoard(self):
 
         coordX = 50
         coordY = 50
 
         for width in range(1, (self.dimensions**2) + 1):
-            #print(str(coordX) + " " + str(coordY))
 
-            self.currentBoard.append(Pieces.piece(self.frame, coordX, coordY, 0))
+            self.currentBoard.append(Pieces.piece(self.frame, coordX, coordY, 1))
 
             if width % 3 == 0:
                 coordY += 100

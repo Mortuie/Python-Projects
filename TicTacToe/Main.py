@@ -5,19 +5,18 @@ import Constants
 """
 @author lb809 on 1/4/2017
 """
+
 pygame.init()
 clock = pygame.time.Clock()
 
 
-
 def main():
     gameRunning = True
-    size = 3 # int(input("Size of the board: "))
 
-    frame = pygame.display.set_mode((size*100, size*100))
+    frame = pygame.display.set_mode((300, 300))
     pygame.display.set_caption("TicTacToe")
 
-    gameBoard = board(frame, size)
+    gameBoard = board(frame)
     gameBoard.createBoard()
 
     while gameRunning:

@@ -20,3 +20,13 @@ class piece:
                 self.frame.blit(imageX, (self.x - Constants.DISPLACEMENT, self.y - Constants.DISPLACEMENT))
             else:
                 self.frame.blit(imageO, (self.x - Constants.DISPLACEMENT, self.y - Constants.DISPLACEMENT))
+
+
+    def changeTypeOfPiece(self, differentType):
+        self.type = differentType
+
+    def isAnEmptyTile(self):
+        return self.type == 0
+
+    def getTypeTile(self):
+        return self.type

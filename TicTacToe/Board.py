@@ -17,14 +17,14 @@ class board:
         coordX = 50
         coordY = 50
 
-        for height in range(3):
-            for width in range(3):
+        for width in range(3):
+            for height in range(3):
 
-                self.currentBoard[height].append(Pieces.piece(self.frame, coordX, coordY, 1))
+                self.currentBoard[width].append(Pieces.piece(self.frame, coordX, coordY, 0))
 
                 coordX += 100
 
-                print(str(height) + " " + str(width))
+
 
             coordY += 100
             coordX = 50
@@ -41,4 +41,16 @@ class board:
             for j in range(self.dimensions):
                 self.currentBoard[i][j].drawPiece()
 
+    def playerPressed(self, x, y):
+        self.currentBoard[int(y/100)][int(x/100)].changeTypeOfPiece(1)
 
+    def botPressed(self):
+        botMadeHisMove = False
+
+        def flickState():
+            botMadeHisMove = True
+
+        while not botMadeHisMove:
+            if self.currentBoard[1][1].isAnEmptyTile:
+                self.currentBoard[1][1].changeTypeOfPiece(2)
+            elif self.currentBoard[1][1].getTypeTile == 2:

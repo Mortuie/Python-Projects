@@ -54,5 +54,5 @@ class board:
             if self.currentBoard[1][1].isAnEmptyTile:
                 self.currentBoard[1][1].changeTypeOfPiece(2)
             elif self.currentBoard[1][1].getTypeTile == 2:
-
-    # TODO add some win check and add some Algorithm
+                pass
+    #TODO add some win check and add some Algorithm

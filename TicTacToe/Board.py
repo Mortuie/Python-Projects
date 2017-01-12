@@ -45,14 +45,13 @@ class board:
         self.currentBoard[int(y/100)][int(x/100)].changeTypeOfPiece(1)
 
     def botPressed(self):
-        botMadeHisMove = False
+        hasBotMoved = False
 
-        def flickState():
-            botMadeHisMove = True
+        for i in range(3):
+                for j in range(3):
+                    if not hasBotMoved and self.currentBoard[i][j].isAnEmptyTile():
+                        self.currentBoard[i][j].changeTypeOfPiece(2)
+                        hasBotMoved = True
 
-        while not botMadeHisMove:
-            if self.currentBoard[1][1].isAnEmptyTile:
-                self.currentBoard[1][1].changeTypeOfPiece(2)
-            elif self.currentBoard[1][1].getTypeTile == 2:
-                pass
-    #TODO add some win check and add some Algorithm
+
+        #TODO add some win check and add some Algorithm

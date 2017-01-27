@@ -55,3 +55,12 @@ class board:
 
 
         #TODO add some win check and add some Algorithm
+
+    def hasGameBeenWon(self, whichPlayerAreYouChecking):
+        # return 0 if game hasn't been won
+        # return 1 if player has
+        # return 2 if bot has
+
+        
+
+        pass

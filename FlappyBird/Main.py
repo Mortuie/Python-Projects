@@ -56,7 +56,7 @@ def main():
                     pipe.updatePipe()
                     pipe.drawPipe()
                     if pipe.collidedWithBird():
-                        pipe.changeColourFromOriginal()
+                        gameEnd(score)
                     else:
                         pipe.changeColourBackToOriginal()
 
@@ -84,6 +84,26 @@ def pause():
     if not quitState:
         pygame.quit()
 
+
+def gameEnd(scoreAchieved):
+
+    while True:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_n:
+                    main()
+
+        frame.fill(Constants.WHITE)
+
+        displayText("Score: " + str(scoreAchieved), Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 2.5)32
+        displayText("Game over you lose.", Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 2)
+        displayText("Press 'n' for a new game.", Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 1.5)
+
+        pygame.display.flip()
+        clock.tick(Constants.FPS)
 
 def displayText(stringDisplayed, x, y):
     scoreText = font.render(stringDisplayed, 1, Constants.BLACK)

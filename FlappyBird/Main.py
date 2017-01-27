@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 frame = pygame.display.set_mode(Constants.SIZE)
 pygame.display.set_caption(Constants.TITLE)
 
-# TODO add like a start screen and a play again screen.
+# TODO collision detection is still very buggy, and so is the gameplay.
 
 def main():
     score = 0
@@ -98,7 +98,7 @@ def gameEnd(scoreAchieved):
 
         frame.fill(Constants.WHITE)
 
-        displayText("Score: " + str(scoreAchieved), Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 2.5)32
+        displayText("Score: " + str(scoreAchieved), Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 2.5)
         displayText("Game over you lose.", Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 2)
         displayText("Press 'n' for a new game.", Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 1.5)
 

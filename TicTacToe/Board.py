@@ -24,8 +24,6 @@ class board:
 
                 coordX += 100
 
-
-
             coordY += 100
             coordX = 50
 

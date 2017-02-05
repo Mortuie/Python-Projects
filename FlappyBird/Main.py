@@ -65,6 +65,10 @@ def main():
         clock.tick(Constants.FPS)
         frameCount += 1
 
+def displayText(stringDisplayed, x, y):
+    scoreText = font.render(stringDisplayed, 1, Constants.BLACK)
+    frame.blit(scoreText, (x, y))
+
 def pause():
     pausedState = True
     quitState = True
@@ -108,6 +112,8 @@ def gameEnd(scoreAchieved):
 def displayText(stringDisplayed, x, y):
     scoreText = font.render(stringDisplayed, 1, Constants.BLACK)
     frame.blit(scoreText, (x, y))
+
+
 
 if __name__ == "__main__":
     main()

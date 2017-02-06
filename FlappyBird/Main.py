@@ -102,6 +102,7 @@ def gameEnd(scoreAchieved):
                 if event.key == pygame.K_q:
                     exit()
 
+        #todo change the way the flying of the bird works. Seems quite dodgy at the moment.
 
         displayText("Score: " + str(scoreAchieved), Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 2.5)
         displayText("Game over you lose.", Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 2)

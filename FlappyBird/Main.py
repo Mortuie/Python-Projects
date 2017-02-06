@@ -99,12 +99,15 @@ def gameEnd(scoreAchieved):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_n:
                     main()
+                if event.key == pygame.K_q:
+                    exit()
 
-        frame.fill(Constants.WHITE)
 
         displayText("Score: " + str(scoreAchieved), Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 2.5)
         displayText("Game over you lose.", Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 2)
         displayText("Press 'n' for a new game.", Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 1.5)
+        displayText("Press 'q' to quit the game.", Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 1.25)
+
 
         pygame.display.flip()
         clock.tick(Constants.FPS)

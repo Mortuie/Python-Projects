@@ -50,3 +50,6 @@ class pipe:
 
     def offPage(self):
         return self.x < (-1) * self.pipeWidth
+
+    def getPipeX(self):
+        return self.x

@@ -30,6 +30,8 @@ def main():
     def PipeArrayIsNotEmpty():
         return len(pipes) != 0
 
+
+
     while gameRunning:
         frame.fill(Constants.WHITE)
         for event in pygame.event.get():
@@ -75,12 +77,15 @@ def pause():
     while pausedState and quitState:
         displayText("Game Paused", Constants.DISPLAYWIDTH / 2, Constants.DISPLAYHEIGHT / 2)
         displayText("'P' to resume", Constants.DISPLAYWIDTH / 2, Constants.DISPLAYHEIGHT/2 + 40)
+        displayText("Press 'q' to quit the game.", Constants.DISPLAYWIDTH / 7, Constants.DISPLAYHEIGHT / 1.25)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quitState = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     pausedState = False
+                if event.key == pygame.K_q:
+                    quitState = False
 
         pygame.display.flip()
         clock.tick(Constants.FPS)

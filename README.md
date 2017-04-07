@@ -12,4 +12,4 @@ so is quoted in the comments in the respective projects.
 * Flappy Bird Clone - Started around: 24/12/16 *(Status: Unfinished)*
 * TicTacToe emulation - Started around 4/01/17 *(Status: Unfinished)*
 
-Leon Boehmer 2016 ©
+Leon Boehmer 2016 - 2017 (C)

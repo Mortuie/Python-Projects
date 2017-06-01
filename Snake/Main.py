@@ -31,45 +31,58 @@ class apple:
     def drawApple(self):
         pygame.draw.rect(frame, RED, (self.x, self.y, self.dim, self.dim))
 
-    def checkCollisionWith(self, snake):
-        pass
-        # write collision code
+
 
 
 class snake:
+    x = int(dimension / 2)
+    y = int(dimension / 2)
+    bodyDimension = 20
+
+    xVel = 0
+    yVel = 0
+
+    snakeParts = []
 
     def __init__(self, frame):
         self.frame = frame
-        self.x = int(dimension / 2) - 10
-        self.y = int(dimension / 2) - 10
-        self.yv = 0
-        self.xv = 0
-        self.dim = 20
-        self.snakeParts = []
         self.snakeParts.append([self.x, self.y])
 
 
     def drawSnake(self):
         for part in self.snakeParts:
-            pygame.draw.rect(self.frame, GREEN, (part[0], part[1], self.dim, self.dim))
+            pygame.draw.rect(self.frame, GREEN, (part[0], part[1], self.bodyDimension, self.bodyDimension))
 
-    def changeInY(self, dir):
-        self.yv = dir * self.dim
-        self.xv = 0
 
-    def changeInX(self, dir):
-        self.xv = dir * self.dim
-        self.yv = 0
+    def changeX(self, dir):
+        self.xVel = 20 * dir
+        self.yVel = 0
+
+
+    def changeY(self, dir):
+        self.xVel = 0
+        self.yVel = 20 * dir
 
     def moveSnake(self):
-        self.x += self.xv
-        self.y += self.yv
+        for i in range(len(self.snakeParts)):
+            if i == 0:
+                self.snakeParts[i][0] += self.xVel
+                self.snakeParts[i][1] += self.yVel
+            else:
+                self.snakeParts[i][0] == self.snakeParts[i-1][0]
+                self.snakeParts[i][1] == self.snakeParts[i-1][1]
+
+
+    def collisionWith(self, listOfApples):
+        for a in reversed(listOfApples):
+            if a.x == self.snakeParts[0][0] and a.y == self.snakeParts[0][1]:
+                listOfApples.remove(a)
 
 
 
 def main():
-
-    app = apple(frame, 150, 150)
+    appleLst = []
+    appleLst.append(apple(frame, 150, 150))
     s = snake(frame)
 
 
@@ -81,22 +94,24 @@ def main():
                 exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
-                    s.changeInY(-1)
+                    s.changeY(-1)
                 if event.key == pygame.K_s:
-                    s.changeInY(1)
+                    s.changeY(1)
                 if event.key == pygame.K_a:
-                    s.changeInX(-1)
+                    s.changeX(-1)
                 if event.key == pygame.K_d:
-                    print("BANTER")
-                    s.changeInX(1)
+                    s.changeX(1)
 
+        s.collisionWith(appleLst)
 
-        app.drawApple()
+        for a in appleLst:
+            a.drawApple()
+
         s.moveSnake()
         s.drawSnake()
 
         pygame.display.flip()
-        clock.tick(60)
+        clock.tick(6)
 
 
 if __name__ == "__main__":

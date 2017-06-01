@@ -45,6 +45,7 @@ class snake:
     def __init__(self, frame):
         self.frame = frame
         self.snakeParts.append([dimension / 2, dimension / 2])
+        self.snakeParts.append([(dimension/2) + 20, (dimension/2)])
 
 
     def drawSnake(self):
@@ -62,7 +63,7 @@ class snake:
         self.yVel = 20 * dir
 
     def moveSnake(self):
-        for i in range(len(self.snakeParts)):
+        for i in reversed(range(len(self.snakeParts))):
             if i == 0:
                 self.snakeParts[i][0] += self.xVel
                 self.snakeParts[i][1] += self.yVel
@@ -75,6 +76,7 @@ class snake:
         for a in reversed(listOfApples):
             if a.x == self.snakeParts[0][0] and a.y == self.snakeParts[0][1]:
                 listOfApples.remove(a)
+                self.snakeParts.append((0, 0))
 
     def checkOffScreen(self):
         if self.snakeParts[0][0] >= dimension:

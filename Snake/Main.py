@@ -35,8 +35,6 @@ class apple:
 
 
 class snake:
-    x = int(dimension / 2)
-    y = int(dimension / 2)
     bodyDimension = 20
 
     xVel = 0
@@ -46,7 +44,7 @@ class snake:
 
     def __init__(self, frame):
         self.frame = frame
-        self.snakeParts.append([self.x, self.y])
+        self.snakeParts.append([dimension / 2, dimension / 2])
 
 
     def drawSnake(self):
@@ -78,6 +76,16 @@ class snake:
             if a.x == self.snakeParts[0][0] and a.y == self.snakeParts[0][1]:
                 listOfApples.remove(a)
 
+    def checkOffScreen(self):
+        if self.snakeParts[0][0] >= dimension:
+            self.snakeParts[0][0] = (-1) * self.bodyDimension
+        elif self.snakeParts[0][0] < 0:
+            self.snakeParts[0][0] = dimension
+        elif self.snakeParts[0][1] >= dimension:
+            self.snakeParts[0][1] = (-1) * self.bodyDimension
+        elif self.snakeParts[0][1] < 0:
+            self.snakeParts[0][1] = dimension
+
 
 
 def main():
@@ -103,6 +111,7 @@ def main():
                     s.changeX(1)
 
         s.collisionWith(appleLst)
+        s.checkOffScreen()
 
         for a in appleLst:
             a.drawApple()

@@ -4,7 +4,7 @@ import pygame
 """
 
 # CONSTANTS
-dimension = 500
+dimension = 600
 
 # Initial Conditions
 pygame.init()
@@ -19,74 +19,35 @@ GREEN = (0, 255, 0)
 
 
 # CLASSES
-
-class apple:
-
-    def __init__(self, frame, x, y):
-        self.dim = 20
-        self.frame = frame
-        self.x = x
-        self.y = y
-
-    def drawApple(self):
-        pygame.draw.rect(frame, RED, (self.x, self.y, self.dim, self.dim))
-
-
-class snake:
-    bodyDimension = 20
-
-    xVel = 0
-    yVel = 0
-
-    snakeParts = []
-
-    def __init__(self, frame):
-        self.frame = frame
-        self.snakeParts.append([dimension / 2, dimension / 2])
-        self.snakeParts.append([(dimension / 2) + 20, (dimension / 2)])
+class Snake:
+    def __init__(self):
+        self.headx = dimension / 2
+        self.heady = dimension / 2
+        self.speedx = 0
+        self.speedy = 0
 
     def drawSnake(self):
-        for part in self.snakeParts:
-            pygame.draw.rect(self.frame, GREEN, (part[0], part[1], self.bodyDimension, self.bodyDimension))
+        pygame.draw.rect(frame, GREEN, (self.headx, self.heady, 20, 20))
 
-    def changeX(self, dir):
-        self.xVel = 20 * dir
-        self.yVel = 0
-
-    def changeY(self, dir):
-        self.xVel = 0
-        self.yVel = 20 * dir
+    def changeDirection(self, direction):
+        self.speedx = 0
+        self.speedy = 0
+        if direction == 'n':
+            self.speedy = -20
+        elif direction == 'e':
+            self.speedx = 20
+        elif direction == 's':
+            self.speedy = 20
+        else:
+            self.speedx = -20
 
     def moveSnake(self):
-        for i in reversed(range(len(self.snakeParts))):
-            if i == 0:
-                self.snakeParts[i][0] += self.xVel
-                self.snakeParts[i][1] += self.yVel
-            else:
-                self.snakeParts[i][0] == self.snakeParts[i - 1][0]
-                self.snakeParts[i][1] == self.snakeParts[i - 1][1]
-
-    def collisionWith(self, listOfApples):
-        for a in reversed(listOfApples):
-            if a.x == self.snakeParts[0][0] and a.y == self.snakeParts[0][1]:
-                listOfApples.remove(a)
-                self.snakeParts.append((0, 0))
-
-    def checkOffScreen(self):
-        if self.snakeParts[0][0] >= dimension:
-            self.snakeParts[0][0] = (-1) * self.bodyDimension
-        elif self.snakeParts[0][0] < 0:
-            self.snakeParts[0][0] = dimension
-        elif self.snakeParts[0][1] >= dimension:
-            self.snakeParts[0][1] = (-1) * self.bodyDimension
-        elif self.snakeParts[0][1] < 0:
-            self.snakeParts[0][1] = dimension
+        self.headx += self.speedx
+        self.heady += self.speedy
 
 
 def main():
-    appleLst = []
-    appleLst.append(apple(frame, 150, 150))
-    s = snake(frame)
+    user = Snake()
 
     while True:
         frame.fill(BLACK)
@@ -95,24 +56,19 @@ def main():
             if event.type == pygame.QUIT:
                 exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
-                    s.changeY(-1)
-                if event.key == pygame.K_s:
-                    s.changeY(1)
-                if event.key == pygame.K_a:
-                    s.changeX(-1)
-                if event.key == pygame.K_d:
-                    s.changeX(1)
+                if event.key == pygame.K_q:
+                    exit()
+                if event.key == pygame.K_w or event.key == pygame.K_UP:
+                    user.changeDirection('n')
+                if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+                    user.changeDirection('s')
+                if event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                    user.changeDirection('w')
+                if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                    user.changeDirection('e')
 
-        s.collisionWith(appleLst)
-        s.checkOffScreen()
-
-        for a in appleLst:
-            a.drawApple()
-
-        s.moveSnake()
-        s.drawSnake()
-
+        user.moveSnake()
+        user.drawSnake()
         pygame.display.flip()
         clock.tick(6)
 

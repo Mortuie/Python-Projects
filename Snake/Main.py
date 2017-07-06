@@ -19,15 +19,26 @@ GREEN = (0, 255, 0)
 
 
 # CLASSES
+class BodyPart:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
 class Snake:
     def __init__(self):
-        self.headx = dimension / 2
-        self.heady = dimension / 2
+        self.bodyParts = []
+        self.bodyParts.append(BodyPart(dimension / 2, dimension / 2))
+        self.bodyParts.append(BodyPart(dimension / 2, (dimension / 2) - 20))
         self.speedx = 0
         self.speedy = 0
 
     def drawSnake(self):
-        pygame.draw.rect(frame, GREEN, (self.headx, self.heady, 20, 20))
+        for part in self.bodyParts:
+            pygame.draw.rect(frame,
+                             GREEN,
+                             (part.x, part.y, 20, 20)
+                             )
 
     def changeDirection(self, direction):
         self.speedx = 0
@@ -42,8 +53,15 @@ class Snake:
             self.speedx = -20
 
     def moveSnake(self):
-        self.headx += self.speedx
-        self.heady += self.speedy
+        i = len(self.bodyParts) - 1
+
+        while i > 0:
+            self.bodyParts[i].x = self.bodyParts[i - 1].x
+            self.bodyParts[i].y = self.bodyParts[i - 1].y
+            i -= 1
+
+        self.bodyParts[0].x += self.speedx
+        self.bodyParts[0].y += self.speedy
 
 
 def main():

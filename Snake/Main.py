@@ -32,8 +32,6 @@ class apple:
         pygame.draw.rect(frame, RED, (self.x, self.y, self.dim, self.dim))
 
 
-
-
 class snake:
     bodyDimension = 20
 
@@ -45,18 +43,15 @@ class snake:
     def __init__(self, frame):
         self.frame = frame
         self.snakeParts.append([dimension / 2, dimension / 2])
-        self.snakeParts.append([(dimension/2) + 20, (dimension/2)])
-
+        self.snakeParts.append([(dimension / 2) + 20, (dimension / 2)])
 
     def drawSnake(self):
         for part in self.snakeParts:
             pygame.draw.rect(self.frame, GREEN, (part[0], part[1], self.bodyDimension, self.bodyDimension))
 
-
     def changeX(self, dir):
         self.xVel = 20 * dir
         self.yVel = 0
-
 
     def changeY(self, dir):
         self.xVel = 0
@@ -68,9 +63,8 @@ class snake:
                 self.snakeParts[i][0] += self.xVel
                 self.snakeParts[i][1] += self.yVel
             else:
-                self.snakeParts[i][0] == self.snakeParts[i-1][0]
-                self.snakeParts[i][1] == self.snakeParts[i-1][1]
-
+                self.snakeParts[i][0] == self.snakeParts[i - 1][0]
+                self.snakeParts[i][1] == self.snakeParts[i - 1][1]
 
     def collisionWith(self, listOfApples):
         for a in reversed(listOfApples):
@@ -89,12 +83,10 @@ class snake:
             self.snakeParts[0][1] = dimension
 
 
-
 def main():
     appleLst = []
     appleLst.append(apple(frame, 150, 150))
     s = snake(frame)
-
 
     while True:
         frame.fill(BLACK)

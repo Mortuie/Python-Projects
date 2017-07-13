@@ -1,10 +1,12 @@
 import pygame
+import random
 """
 @author lb809 on 6/1/2017
 """
 
 # CONSTANTS
 DIMENSION = 600
+MAX_BLOCK = (DIMENSION / 20) - 1
 
 # Initial Conditions
 pygame.init()
@@ -63,6 +65,11 @@ class Snake:
         else:
             self.speedx = -20
 
+    def addToTail(self):
+        x = self.bodyParts[len(self.bodyParts) - 1].x
+        y = self.bodyParts[len(self.bodyParts) - 1].y
+        self.bodyParts.append(BodyPart(x, y))
+
     def moveSnake(self):
         i = len(self.bodyParts) - 1
 
@@ -99,10 +106,32 @@ class Snake:
 
         return True
 
+    def hasEatenApple(self, apples, score):
+        for apple in apples:
+            if (apple.x == self.bodyParts[0].x and
+                    apple.y == self.bodyParts[0].y):
+                apples.remove(apple)
+                x = self.getRandomDimension()
+                y = self.getRandomDimension()
+
+                while x == self.bodyParts[0].x:
+                    x = self.getRandomDimension()
+                while y == self.bodyParts[0].y:
+                    y = self.getRandomDimension()
+
+                apples.append(Apple(x, y))
+                self.addToTail()
+                score += 10
+
+    def getRandomDimension(self):
+        return random.randint(0, MAX_BLOCK) * 20
+
 
 def main():
+    score = 0
     user = Snake()
-    a = Apple(0, 0)
+    apples = []
+    apples.append(Apple(60, 100))
 
     while True:
         frame.fill(BLACK)
@@ -125,8 +154,12 @@ def main():
         if not user.moveSnake():
             # end game
             print("SHALALALABANG")
+
+        for apple in apples:
+            apple.drawApple()
+
+        user.hasEatenApple(apples, score)
         user.drawSnake()
-        a.drawApple()
         pygame.display.flip()
         clock.tick(6)
 

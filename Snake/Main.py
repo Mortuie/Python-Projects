@@ -13,6 +13,7 @@ pygame.init()
 clock = pygame.time.Clock()
 pygame.display.set_caption("Snake")
 frame = pygame.display.set_mode((DIMENSION, DIMENSION))
+f = pygame.font.SysFont(None, 12)
 
 # COLOURS
 BLACK = (0, 0, 0)
@@ -107,6 +108,7 @@ class Snake:
         return True
 
     def hasEatenApple(self, apples, score):
+        f.render("NIIGA", 1, (255, 255, 255))
         for apple in apples:
             if (apple.x == self.bodyParts[0].x and
                     apple.y == self.bodyParts[0].y):
@@ -122,6 +124,7 @@ class Snake:
                 apples.append(Apple(x, y))
                 self.addToTail()
                 score += 10
+                print(score)
 
     def getRandomDimension(self):
         return random.randint(0, MAX_BLOCK) * 20

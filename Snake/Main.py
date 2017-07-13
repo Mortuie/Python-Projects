@@ -19,6 +19,15 @@ GREEN = (0, 255, 0)
 
 
 # CLASSES
+class Apple:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def drawApple(self):
+        pygame.draw.rect(frame, RED, (self.x, self.y, 20, 20))
+
+
 class BodyPart:
     def __init__(self, x, y):
         self.x = x
@@ -65,6 +74,16 @@ class Snake:
         self.bodyParts[0].x += self.speedx
         self.bodyParts[0].y += self.speedy
 
+        # collision detection
+        j = 1
+        while j < len(self.bodyParts):
+            if ((self.speedx != 0 or self.speedy != 0) and
+                self.bodyParts[0].x == self.bodyParts[j].x and
+                    self.bodyParts[0].y == self.bodyParts[j].y):
+
+                return False
+            j += 1
+
         if self.bodyParts[0].x < 0:
             # gone out the left of the screen
             self.bodyParts[0].x = DIMENSION
@@ -78,9 +97,12 @@ class Snake:
             # gone out of the bottom of the page
             self.bodyParts[0].y = 0
 
+        return True
+
 
 def main():
     user = Snake()
+    a = Apple(0, 0)
 
     while True:
         frame.fill(BLACK)
@@ -100,8 +122,11 @@ def main():
                 if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                     user.changeDirection('e')
 
-        user.moveSnake()
+        if not user.moveSnake():
+            # end game
+            print("SHALALALABANG")
         user.drawSnake()
+        a.drawApple()
         pygame.display.flip()
         clock.tick(6)
 

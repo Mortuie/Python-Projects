@@ -4,13 +4,13 @@ import pygame
 """
 
 # CONSTANTS
-dimension = 600
+DIMENSION = 600
 
 # Initial Conditions
 pygame.init()
 clock = pygame.time.Clock()
 pygame.display.set_caption("Snake")
-frame = pygame.display.set_mode((dimension, dimension))
+frame = pygame.display.set_mode((DIMENSION, DIMENSION))
 
 # COLOURS
 BLACK = (0, 0, 0)
@@ -28,8 +28,10 @@ class BodyPart:
 class Snake:
     def __init__(self):
         self.bodyParts = []
-        self.bodyParts.append(BodyPart(dimension / 2, dimension / 2))
-        self.bodyParts.append(BodyPart(dimension / 2, (dimension / 2) - 20))
+        self.bodyParts.append(BodyPart(DIMENSION / 2, DIMENSION / 2))
+        self.bodyParts.append(BodyPart(DIMENSION / 2, DIMENSION / 2))
+        self.bodyParts.append(BodyPart(DIMENSION / 2, DIMENSION / 2))
+        self.bodyParts.append(BodyPart(DIMENSION / 2, DIMENSION / 2))
         self.speedx = 0
         self.speedy = 0
 
@@ -62,6 +64,19 @@ class Snake:
 
         self.bodyParts[0].x += self.speedx
         self.bodyParts[0].y += self.speedy
+
+        if self.bodyParts[0].x < 0:
+            # gone out the left of the screen
+            self.bodyParts[0].x = DIMENSION
+        elif self.bodyParts[0].x > DIMENSION:
+            # gone out the right of the screen
+            self.bodyParts[0].x = 0
+        elif self.bodyParts[0].y < 0:
+            # gone out the top of the page
+            self.bodyParts[0].y = DIMENSION
+        elif self.bodyParts[0].y > DIMENSION:
+            # gone out of the bottom of the page
+            self.bodyParts[0].y = 0
 
 
 def main():

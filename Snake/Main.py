@@ -28,6 +28,23 @@ def displayText(textToDisplay, x, y):
     frame.blit(scoretext, (x, y))
 
 
+def gameEnd():
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    exit()
+                if event.key == pygame.K_p:
+                    return
+
+        displayText("You have lost the game", 100, 100)
+        displayText("Press, q to quit and p to play again", 100, 200)
+        pygame.display.flip()
+        clock.tick(6)
+
+
 # CLASSES
 class Apple:
     def __init__(self, x, y):
@@ -163,9 +180,9 @@ def main():
                     user.changeDirection('e')
 
         if not user.moveSnake():
-            displayText("You have lost the game", 100, 100)
             user.newGame()
             score = 0
+            gameEnd()
 
         for apple in apples:
             apple.drawApple()

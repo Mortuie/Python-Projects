@@ -21,6 +21,13 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
 
+# USEFUL FUNCTIONS
+def texts(score):
+    font = pygame.font.Font(None, 30)
+    scoretext = font.render("Score:" + str(score), 1, (255, 255, 255))
+    frame.blit(scoretext, ((DIMENSION / 2) - 75, 0))
+
+
 # CLASSES
 class Apple:
     def __init__(self, x, y):
@@ -107,7 +114,7 @@ class Snake:
 
         return True
 
-    def hasEatenApple(self, apples, score):
+    def hasEatenApple(self, apples):
         f.render("NIIGA", 1, (255, 255, 255))
         for apple in apples:
             if (apple.x == self.bodyParts[0].x and
@@ -123,8 +130,8 @@ class Snake:
 
                 apples.append(Apple(x, y))
                 self.addToTail()
-                score += 10
-                print(score)
+                return True
+        return False
 
     def getRandomDimension(self):
         return random.randint(0, MAX_BLOCK) * 20
@@ -161,8 +168,10 @@ def main():
         for apple in apples:
             apple.drawApple()
 
-        user.hasEatenApple(apples, score)
+        if user.hasEatenApple(apples):
+            score += 10
         user.drawSnake()
+        texts(score)
         pygame.display.flip()
         clock.tick(6)
 

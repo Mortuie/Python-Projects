@@ -22,10 +22,10 @@ GREEN = (0, 255, 0)
 
 
 # USEFUL FUNCTIONS
-def texts(score):
+def displayText(textToDisplay, x, y):
     font = pygame.font.Font(None, 30)
-    scoretext = font.render("Score:" + str(score), 1, (255, 255, 255))
-    frame.blit(scoretext, ((DIMENSION / 2) - 75, 0))
+    scoretext = font.render(textToDisplay, 1, (255, 255, 255))
+    frame.blit(scoretext, (x, y))
 
 
 # CLASSES
@@ -45,7 +45,7 @@ class BodyPart:
 
 
 class Snake:
-    def __init__(self):
+    def newGame(self):
         self.bodyParts = []
         self.bodyParts.append(BodyPart(DIMENSION / 2, DIMENSION / 2))
         self.bodyParts.append(BodyPart(DIMENSION / 2, DIMENSION / 2))
@@ -140,6 +140,7 @@ class Snake:
 def main():
     score = 0
     user = Snake()
+    user.newGame()
     apples = []
     apples.append(Apple(60, 100))
 
@@ -162,8 +163,9 @@ def main():
                     user.changeDirection('e')
 
         if not user.moveSnake():
-            # end game
-            print("SHALALALABANG")
+            displayText("You have lost the game", 100, 100)
+            user.newGame()
+            score = 0
 
         for apple in apples:
             apple.drawApple()
@@ -171,7 +173,7 @@ def main():
         if user.hasEatenApple(apples):
             score += 10
         user.drawSnake()
-        texts(score)
+        displayText("Score: " + str(score), (DIMENSION / 2) - 75, 0)
         pygame.display.flip()
         clock.tick(6)
 

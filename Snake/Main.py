@@ -22,13 +22,26 @@ GREEN = (0, 255, 0)
 
 
 # USEFUL FUNCTIONS
+def checkHighscore():
+    file = open("highscores.txt", "r+")
+    return int(file.read())
+
+
+def writeNewScore(score):
+    open("highscores.txt", "w").close()
+    file = open("highscores.txt", "w")
+    file.write(str(score))
+    file.close()
+
+
 def displayText(textToDisplay, x, y):
     font = pygame.font.Font(None, 30)
     scoretext = font.render(textToDisplay, 1, (255, 255, 255))
     frame.blit(scoretext, (x, y))
 
 
-def gameEnd():
+def gameEnd(score):
+    highScore = checkHighscore()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -39,6 +52,10 @@ def gameEnd():
                 if event.key == pygame.K_p:
                     return
 
+        if highScore < score:
+            writeNewScore(score)
+            displayText("You have set a new highscore: " + str(score),
+                        100, 300)
         displayText("You have lost the game", 100, 100)
         displayText("Press, q to quit and p to play again", 100, 200)
         pygame.display.flip()
@@ -181,8 +198,8 @@ def main():
 
         if not user.moveSnake():
             user.newGame()
+            gameEnd(score)
             score = 0
-            gameEnd()
 
         for apple in apples:
             apple.drawApple()
